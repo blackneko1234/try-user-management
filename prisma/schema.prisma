@@ -1,0 +1,21 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mongodb"
+    //url      = env("DB_URI")
+    url      = "mongodb://nube:1234@banksss1.thddns.net:8844/test?authSource=admin"
+}
+
+model User {
+    id        String @id @default(auto()) @map("_id") @db.ObjectId
+    username  String @unique
+    password  String
+    role      String
+    name      String
+    age       Int
+    birthdate String
+    address   String
+    remark    String
+}
