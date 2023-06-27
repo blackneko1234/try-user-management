@@ -8,6 +8,7 @@ import moment from "moment";
 function Console() {
     const navigate = useNavigate()
     const [users, setUsers] = useState([])
+    const [userId, setUserId] = useState([])
     useEffect(() => {
         const fetchData = () => {
             getAllUsers().then(() => {
@@ -65,14 +66,14 @@ function Console() {
                                 Edit
                             </Button>
                         </Link>
-                        <Button danger type="primary" onClick={showModal}>Delete</Button>
+                        <Button danger type="primary" onClick={() => showModal(record.key)}>Delete</Button>
                     </Space>
                     <Modal title="Profile Delete Confirmation" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}
                         footer={[
                             <Button key="Cancel" type="primary" onClick={handleCancel}>
                                 Cancel
                             </Button>,
-                            <Button key="Delete" type="ghost" danger onClick={() => handleOk(record.key)}>
+                            <Button key="Delete" type="ghost" danger onClick={() => handleOk(userId)}>
                                 Delete
                             </Button>,
                         ]}>
@@ -83,7 +84,8 @@ function Console() {
         },
     ];
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const showModal = () => {
+    const showModal = (id) => {
+        setUserId(id)
         setIsModalOpen(true);
     };
     const handleOk = (id) => {
